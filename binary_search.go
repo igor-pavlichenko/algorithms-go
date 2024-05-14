@@ -9,7 +9,7 @@ func binarySearch(haystack []int, needle int) (int, error) {
 	high := len(haystack) // end is exclusive, meaning we will go up to, but not including it
 
 	for low < high {
-		mid := low + (high-low)/2 // wtf.. why floor wont accept int
+		mid := low + (high-low)/2
 		value := haystack[mid]
 
 		if value == needle {
