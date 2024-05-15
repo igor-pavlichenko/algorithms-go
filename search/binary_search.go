@@ -12,7 +12,7 @@ until you've narrowed down the possible locations to just one.
 Worst-case complexity: O(log n)
 Best complexity: O(1)
 */
-func binarySearch(haystack []int, needle int) (int, error) {
+func BinarySearch(haystack []int, needle int) (int, error) {
 	low := 0              // start is inclusive
 	high := len(haystack) // end is exclusive, meaning we will go up to, but not including it
 

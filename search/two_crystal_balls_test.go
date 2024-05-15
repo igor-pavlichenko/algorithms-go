@@ -17,7 +17,7 @@ func TestTwoCrystalBalls(t *testing.T) {
 		floors[i] = true
 	}
 
-	index, err := two_crystal_balls(floors)
+	index, err := TwoCrystalBalls(floors)
 	assert.Equal(idx, index)
 	assert.Nil(err)
 }
@@ -26,7 +26,7 @@ func TestTwoCrystalBalls_firstFloor(t *testing.T) {
 	assert := assert.New(t)
 
 	floors := []bool{false, true, true, true, true, true, true, true, true}
-	index, err := two_crystal_balls(floors)
+	index, err := TwoCrystalBalls(floors)
 	assert.Equal(1, index)
 	assert.Nil(err)
 }
@@ -35,7 +35,7 @@ func TestTwoCrystalBalls_zerothFloor(t *testing.T) {
 	assert := assert.New(t)
 
 	floors := []bool{true, true, true, true, true, true, true, true, true}
-	index, err := two_crystal_balls(floors)
+	index, err := TwoCrystalBalls(floors)
 	assert.Equal(0, index)
 	assert.Nil(err)
 }
@@ -44,7 +44,7 @@ func TestTwoCrystalBalls_ballsNeverBreak(t *testing.T) {
 	assert := assert.New(t)
 
 	floors := []bool{false, false, false, false, false, false, false, false, false}
-	index, err := two_crystal_balls(floors)
+	index, err := TwoCrystalBalls(floors)
 	assert.Equal(-1, index)
 	assert.Error(err)
 }

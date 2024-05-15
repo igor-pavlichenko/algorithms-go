@@ -12,7 +12,7 @@ can be dropped without breaking in the most optimized way.
 Worst-case complexity: O(√n)
 Best complexity: O(1)
 */
-func two_crystal_balls(floors []bool) (int, error) {
+func TwoCrystalBalls(floors []bool) (int, error) {
 	// we want to reach sub-linear complexity, and we can't really reach log here, that's why we use square root
 	jumpAmount := int(math.Floor(math.Sqrt(float64(len(floors)))))
 
