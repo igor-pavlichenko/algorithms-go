@@ -42,9 +42,12 @@ func (q *Queue[T]) Dequeue() (T, error) {
 	if q.length < 1 {
 		var value T
 		return value, errors.New("Queue is empty")
+	} else {
+		q.length--
+		prevHead := q.head
+		q.head = prevHead.next
+		return prevHead.value, nil
 	}
-
-	return q.head.value, nil
 }
 
 func (q *Queue[T]) Peek() (T, error) {

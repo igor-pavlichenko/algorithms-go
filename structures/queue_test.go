@@ -30,13 +30,21 @@ func TestDequeue(t *testing.T) {
 	queue := NewQueue[int]()
 	queue.Enqueue(55)
 	queue.Enqueue(33)
-	// value, err := queue.Dequeue()
-	// assert.Equal(55, value)
+	value, err := queue.Dequeue()
+	assert.Equal(55, value)
+	assert.Nil(err)
 	assert.Equal(1, queue.length)
 
+	queue.Dequeue()
+	assert.Equal(0, queue.length)
+
 	peekVal, peekErr := queue.Peek()
-	assert.Equal(33, peekVal)
-	assert.Nil(peekErr)
+	assert.Error(peekErr)
+	assert.Equal(0, peekVal)
+
+	dqVal, dqErr := queue.Dequeue()
+	assert.Equal(0, dqVal)
+	assert.Error(dqErr)
 }
 
 func TestPeek(t *testing.T) {
