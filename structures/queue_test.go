@@ -13,7 +13,10 @@ func TestEnqueue(t *testing.T) {
 	queue.Enqueue(Node[int]{value: 55})
 	queue.Enqueue(Node[int]{value: 33})
 	assert.Equal(2, queue.length)
-	assert.Equal(55, queue.Peek())
+
+	peekVal, peekErr := queue.Peek()
+	assert.Equal(55, peekVal)
+	assert.Nil(peekErr)
 }
 
 func TestDequeue(t *testing.T) {
@@ -25,7 +28,10 @@ func TestDequeue(t *testing.T) {
 	value := queue.Dequeue()
 	assert.Equal(55, value)
 	assert.Equal(1, queue.length)
-	assert.Equal(33, queue.Peek())
+
+	peekVal, peekErr := queue.Peek()
+	assert.Equal(33, peekVal)
+	assert.Nil(peekErr)
 }
 
 func TestPeek(t *testing.T) {
@@ -33,5 +39,8 @@ func TestPeek(t *testing.T) {
 
 	queue := NewQueue[int]()
 	queue.head = &Node[int]{value: 11}
-	assert.Equal(11, queue.Peek())
+	queue.length++
+	val, err := queue.Peek()
+	assert.Equal(11, val)
+	assert.Nil(err)
 }
