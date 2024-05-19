@@ -26,6 +26,17 @@ func NewStack[T any]() *Stack[T] {
 	return &Stack[T]{}
 }
 
+func (s *Stack[T]) Push(item T) {
+	newNode := &Node[T]{value: item}
+	if s.length < 1 {
+		s.head = newNode
+	} else {
+		newNode.prev = s.head
+		s.head = newNode
+	}
+	s.length++
+}
+
 func (s *Stack[T]) Peek() (T, error) {
 	if s.length < 1 {
 		var value T
