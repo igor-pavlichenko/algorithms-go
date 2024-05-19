@@ -37,6 +37,18 @@ func (s *Stack[T]) Push(item T) {
 	s.length++
 }
 
+func (s *Stack[T]) Pop() (T, error) {
+	if s.length < 1 {
+		var zeroValue T
+		return zeroValue, errors.New("Stack is empty")
+	}
+
+	s.length--
+	oldHead := s.head
+	s.head = s.head.prev
+	return oldHead.value, nil
+}
+
 func (s *Stack[T]) Peek() (T, error) {
 	if s.length < 1 {
 		var value T
