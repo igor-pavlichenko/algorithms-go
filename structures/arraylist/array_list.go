@@ -75,6 +75,7 @@ func (list *ArrayList[T]) ToString() string {
 		}
 	}
 
+	// print empty indexes
 	for j := list.length - 1; j < list.capacity; j++ {
 		str += "[ ]"
 
