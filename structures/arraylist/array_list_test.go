@@ -53,3 +53,16 @@ func TestGetError(t *testing.T) {
 	assert.Zero(val2)
 	assert.Error(err2)
 }
+
+func TestToString(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewArrayList[int](3)
+	list.Append(1)
+	list.Append(1)
+	list.Append(1)
+	list.Append(2)
+	str := list.ToString()
+
+	assert.Equal("[1] - [1] - [1] - [2] - [ ] - [ ] - [ ]", str)
+}

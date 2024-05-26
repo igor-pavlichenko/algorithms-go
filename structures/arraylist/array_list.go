@@ -1,6 +1,9 @@
 package arraylist
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 /*
 An ArrayList is a dynamically sized array that doubles capacity when it hits the limit.
@@ -58,4 +61,27 @@ func (list *ArrayList[T]) Get(index int) (T, error) {
 
 	return (*list.array)[index], nil
 
+}
+
+func (list *ArrayList[T]) ToString() string {
+	var str string = ""
+	for i := 0; i < list.length; i++ {
+		str += "["
+		str += fmt.Sprint((*list.array)[i])
+		str += "]"
+
+		if i+1 < list.capacity {
+			str += " - "
+		}
+	}
+
+	for j := list.length - 1; j < list.capacity; j++ {
+		str += "[ ]"
+
+		if j+1 < list.capacity {
+			str += " - "
+		}
+	}
+
+	return str
 }
