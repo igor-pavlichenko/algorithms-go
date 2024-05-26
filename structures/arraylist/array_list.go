@@ -1,5 +1,7 @@
 package arraylist
 
+import "errors"
+
 /*
 An ArrayList is a dynamically sized array that doubles capacity when it hits the limit.
 It also includes a bunch of "quality of life" methods to manipulate and access it's elements.
@@ -42,4 +44,18 @@ func (list *ArrayList[T]) Append(item T) {
 
 	(*list.array)[list.length] = item
 	list.length++
+}
+
+func (list *ArrayList[T]) Get(index int) (T, error) {
+	if list.length == 0 {
+		var nilValue T
+		return nilValue, errors.New("list empty")
+	}
+	if index < 0 || index >= list.length {
+		var nilValue T
+		return nilValue, errors.New("invalid index")
+	}
+
+	return (*list.array)[index], nil
+
 }
