@@ -101,22 +101,26 @@ func (list *ArrayList[T]) RemoveAt(idx int) (T, error) {
 		(*list.array)[i] = (*list.array)[i+1]
 	}
 
+	// not sure how to actually remove the item from underlying
+	// array and destroy that reference...
+	// in the real world, Go's slices api should be used instead
+	// "re-slicing" - https://stackoverflow.com/a/57213476/2460988
 	list.length--
 
 	return item, nil
 }
 
-func (list *ArrayList[T]) Get(index int) (T, error) {
+func (list *ArrayList[T]) Get(idx int) (T, error) {
 	if list.length == 0 {
 		var nilValue T
 		return nilValue, errors.New("list empty")
 	}
-	if index < 0 || index >= list.length {
+	if idx < 0 || idx >= list.length {
 		var nilValue T
 		return nilValue, errors.New("invalid index")
 	}
 
-	return (*list.array)[index], nil
+	return (*list.array)[idx], nil
 
 }
 
