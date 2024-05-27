@@ -95,6 +95,31 @@ func TestRemoveAt(t *testing.T) {
 	assert.Equal("[a] - [c] - [ ]", list.ToString())
 }
 
+func TestRemove(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewArrayList[string](3)
+	list.Append("a")
+	list.Append("b")
+	list.Append("c")
+	removed, removeErr := list.Remove("b")
+
+	assert.Equal(2, list.length)
+	assert.Equal(3, list.capacity)
+	assert.Equal("b", removed)
+	assert.Nil(removeErr)
+
+	item, err := list.Get(1)
+	assert.Equal("c", item)
+	assert.Nil(err)
+
+	zVal, errBounds := list.Get(2)
+	assert.Zero(zVal)
+	assert.Error(errBounds)
+
+	assert.Equal("[a] - [c] - [ ]", list.ToString())
+}
+
 func TestGet(t *testing.T) {
 	assert := assert.New(t)
 

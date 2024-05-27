@@ -8,14 +8,22 @@ import (
 /*
 An ArrayList is a dynamically sized array that doubles capacity when it hits the limit.
 It also includes a bunch of "quality of life" methods to manipulate and access it's elements.
+
+complexities:
+prepend: O(n)
+insertAt: O(n)
+append: O(1)
+remove: O(n)
+get: O(1)
+removeAt: O(n)
 */
-type ArrayList[T any] struct {
+type ArrayList[T comparable] struct {
 	length   int
 	capacity int
 	array    *[]T
 }
 
-func NewArrayList[T any](initialCapacity int) *ArrayList[T] {
+func NewArrayList[T comparable](initialCapacity int) *ArrayList[T] {
 	// Go is so strictly typed that it's impossible to initialize
 	// a raw array with size as input of the function
 	// arr := new([initialCapacity]T)
@@ -108,6 +116,23 @@ func (list *ArrayList[T]) RemoveAt(idx int) (T, error) {
 	list.length--
 
 	return item, nil
+}
+
+func (list *ArrayList[T]) Remove(item T) (T, error) {
+	foundIndex := -1
+	for i := 0; i < list.length; i++ {
+		if (*list.array)[i] == item {
+			foundIndex = i
+			break
+		}
+	}
+
+	if foundIndex == -1 {
+		var zVal T
+		return zVal, errors.New("not found")
+	}
+
+	return list.RemoveAt(foundIndex)
 }
 
 func (list *ArrayList[T]) Get(idx int) (T, error) {
