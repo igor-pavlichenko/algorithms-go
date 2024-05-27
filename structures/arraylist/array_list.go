@@ -85,6 +85,27 @@ func (list *ArrayList[T]) Append(item T) {
 	list.length++
 }
 
+func (list *ArrayList[T]) RemoveAt(idx int) (T, error) {
+	var item T
+	if list.length == 0 {
+		return item, errors.New("list empty")
+	}
+	if idx < 0 || idx >= list.length {
+		return item, errors.New("invalid index")
+	}
+
+	item = (*list.array)[idx]
+
+	// shift all consecutive items to fill the removed index
+	for i := idx; i < list.length-1; i++ {
+		(*list.array)[i] = (*list.array)[i+1]
+	}
+
+	list.length--
+
+	return item, nil
+}
+
 func (list *ArrayList[T]) Get(index int) (T, error) {
 	if list.length == 0 {
 		var nilValue T
