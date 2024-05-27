@@ -37,6 +37,26 @@ func TestInsertAtError(t *testing.T) {
 	assert.Error(err)
 }
 
+func TestPrepend(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewArrayList[string](3)
+	list.Prepend("a")
+	list.Prepend("b")
+	list.Prepend("c")
+
+	assert.Equal(3, list.length)
+	assert.Equal(3, list.capacity)
+
+	first, firstErr := list.Get(0)
+	assert.Equal("c", first)
+	assert.Nil(firstErr)
+
+	last, lastErr := list.Get(2)
+	assert.Equal("a", last)
+	assert.Nil(lastErr)
+}
+
 func TestAppend(t *testing.T) {
 	assert := assert.New(t)
 

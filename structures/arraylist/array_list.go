@@ -71,6 +71,11 @@ func (list *ArrayList[T]) InsertAt(item T, idx int) (bool, error) {
 	return true, nil
 }
 
+func (list *ArrayList[T]) Prepend(item T) {
+	// this is the same as inserting at index 0
+	list.InsertAt(item, 0)
+}
+
 func (list *ArrayList[T]) Append(item T) {
 	if list.length == list.capacity {
 		list.doubleCapacity()
