@@ -6,6 +6,37 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestInsertAt(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewArrayList[string](3)
+	list.InsertAt("a", 0)
+	list.InsertAt("b", 0)
+	list.InsertAt("c", 0)
+	list.InsertAt("d", 0)
+
+	assert.Equal(4, list.length)
+	assert.Equal(6, list.capacity)
+
+	first, firstErr := list.Get(0)
+	assert.Equal("d", first)
+	assert.Nil(firstErr)
+
+	last, lastErr := list.Get(3)
+	assert.Equal("a", last)
+	assert.Nil(lastErr)
+}
+
+func TestInsertAtError(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewArrayList[string](3)
+	res, err := list.InsertAt("a", 3)
+
+	assert.Zero(res)
+	assert.Error(err)
+}
+
 func TestAppend(t *testing.T) {
 	assert := assert.New(t)
 

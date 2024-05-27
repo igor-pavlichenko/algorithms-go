@@ -40,6 +40,37 @@ func (list *ArrayList[T]) doubleCapacity() {
 	list.array = &newArr
 }
 
+func (list *ArrayList[T]) InsertAt(item T, idx int) (bool, error) {
+	if list.length == list.capacity {
+		list.doubleCapacity()
+	}
+
+	if idx > list.length {
+		return false, errors.New("index out of bounds")
+	}
+
+	// first item insert at index 0
+	if list.length == 0 && idx == 0 {
+		(*list.array)[0] = item
+		list.length++
+		return true, nil
+	}
+
+	// otherwise we need to shift elements to make space for new item at that index
+	i := list.length
+	for ; i > idx; i-- {
+		// keep shifting elements to the end until we reach the provided index
+		(*list.array)[i] = (*list.array)[i-1]
+	}
+
+	// we reached that index, and all elements have been shifted
+	// it's safe to insert the item here
+	(*list.array)[i] = item
+	list.length++
+
+	return true, nil
+}
+
 func (list *ArrayList[T]) Append(item T) {
 	if list.length == list.capacity {
 		list.doubleCapacity()
