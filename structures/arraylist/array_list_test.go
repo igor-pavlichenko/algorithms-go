@@ -115,5 +115,5 @@ func TestToString(t *testing.T) {
 	list.Append(2)
 	str := list.ToString()
 
-	assert.Equal("[1] - [1] - [1] - [2] - [ ] - [ ] - [ ]", str)
+	assert.Equal("[1] - [1] - [1] - [2] - [ ] - [ ]", str)
 }
