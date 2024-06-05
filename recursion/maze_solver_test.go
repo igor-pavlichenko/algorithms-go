@@ -1,13 +1,14 @@
 package recursion
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestInsertAt(t *testing.T) {
+func TestSolve(t *testing.T) {
 	assert := assert.New(t)
 	maze := []string{
 		"xxxxxxxxxx x",
@@ -17,7 +18,7 @@ func TestInsertAt(t *testing.T) {
 		"x          x",
 		"x xxxxxxxxxx",
 	}
-	expectedResult := []Point{
+	expectedResultPoints := []Point{
 		{x: 10, y: 0},
 		{x: 10, y: 1},
 		{x: 10, y: 2},
@@ -34,10 +35,15 @@ func TestInsertAt(t *testing.T) {
 		{x: 1, y: 4},
 		{x: 1, y: 5},
 	}
+	expectedResult := drawPath(maze, expectedResultPoints)
 
-	actualResult := Solve(maze, "x", Point{x: 10, y: 0}, Point{x: 1, y: 5})
+	actualResultPoints := Solve(maze, "x", Point{x: 10, y: 0}, Point{x: 1, y: 5})
+	actualResult := drawPath(maze, actualResultPoints)
+	for _, line := range actualResult {
+		fmt.Println(line)
+	}
 
-	assert.Equal(drawPath(maze, expectedResult), drawPath(maze, actualResult))
+	assert.Equal(expectedResult, actualResult)
 
 }
 
