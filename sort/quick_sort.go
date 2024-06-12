@@ -25,13 +25,22 @@ Usually split into 2 functions:
 Complexity: O(n*log(n))
 */
 func QuickSort(arr []int) {
+	qs(arr, 0, len(arr)-1)
 
 }
 
 // lo - abbreviation of LOW
 // hi - abbreviation of HIGH, unusual thing - both LOW & HIGH are inclusive
 func qs(arr []int, lo int, hi int) {
+	// base case
+	if lo >= hi {
+		return
+	}
 
+	pivotIdx := partition(arr, lo, hi)
+
+	qs(arr, lo, pivotIdx-1)
+	qs(arr, pivotIdx+1, hi)
 }
 
 func partition(arr []int, lo int, hi int) int {
