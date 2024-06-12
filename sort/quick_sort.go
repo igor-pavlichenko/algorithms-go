@@ -28,14 +28,33 @@ func QuickSort(arr []int) {
 
 }
 
-func qs(
-	arr []int,
-	lo int, // abbreviation of LOW
-	hi int, // abbreviation of HIGH, unusual thing - both LOW & HIGH are inclusive
-) {
+// lo - abbreviation of LOW
+// hi - abbreviation of HIGH, unusual thing - both LOW & HIGH are inclusive
+func qs(arr []int, lo int, hi int) {
 
 }
 
 func partition(arr []int, lo int, hi int) int {
+	pivot := arr[hi] // there are many variations for to pivot, this is the simplest
+	idx := lo - 1    // will be incremented whenever we find an element >= pivot
 
+	// now we need to walk from "lo" to "hi" but not including "hi" because it's the pivot
+	// and do weak sort on this sub-array, meaning put everything that's less than pivot to the left
+	for i := lo; i < hi; i++ {
+		if arr[i] <= pivot {
+			idx++
+			tmp := arr[i]
+			arr[i] = arr[idx]
+			arr[idx] = tmp
+		}
+	}
+	// by now we moved everything that is <= pivot to beginning
+	// now we need to move our pivot to idx position
+	// so that we hold true to the rule of
+	// "everything to the left of pivot needs to be <= pivot and everything right needs to be > pivot"
+	idx++
+	arr[hi] = arr[idx] // move this element to the end where pivot was
+	arr[idx] = pivot   // move pivot to it's final position
+
+	return idx // return new index of pivot
 }
