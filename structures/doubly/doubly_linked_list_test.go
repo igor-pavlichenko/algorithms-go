@@ -6,15 +6,28 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestToString(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+
+	assert.Equal("", list.ToString())
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	assert.Equal(3, list.length)
+	assert.Equal("[1] - [2] - [3]", list.ToString())
+}
+
 func TestAppend(t *testing.T) {
 	assert := assert.New(t)
 
 	list := NewDoublyLinkedList[int]()
-	list.append(1)
-	list.append(2)
-	list.append(3)
 
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
 	assert.Equal(3, list.length)
-	assert.Equal("[1] - [2] - [3]", list.length)
-
+	assert.Equal("[1] - [2] - [3]", list.ToString())
 }
