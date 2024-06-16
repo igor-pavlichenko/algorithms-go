@@ -28,9 +28,24 @@ func (list *DoublyLinkedList[T]) Append(item T) {
 		list.tail = &newNode
 		return
 	}
-	list.tail.next = &newNode
 	newNode.prev = list.tail
+	list.tail.next = &newNode
 	list.tail = &newNode
+}
+
+// complexity: O(1)
+func (list *DoublyLinkedList[T]) Prepend(item T) {
+	newNode := Node[T]{value: item}
+
+	list.length++
+	if list.head == nil {
+		list.head = &newNode
+		list.tail = &newNode
+		return
+	}
+	newNode.next = list.head
+	list.head.prev = &newNode
+	list.head = &newNode
 }
 
 // complexity: O(n)

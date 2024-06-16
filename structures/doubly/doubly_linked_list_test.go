@@ -31,3 +31,16 @@ func TestAppend(t *testing.T) {
 	assert.Equal(3, list.length)
 	assert.Equal("[1] - [2] - [3]", list.ToString())
 }
+
+func TestPrepend(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+
+	list.Append(4)
+	list.Prepend(3)
+	list.Prepend(2)
+	list.Prepend(1)
+	assert.Equal(4, list.length)
+	assert.Equal("[1] - [2] - [3] - [4]", list.ToString())
+}
