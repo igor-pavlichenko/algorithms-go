@@ -86,6 +86,16 @@ func (list *DoublyLinkedList[T]) Get(idx int) (T, error) {
 	return node.value, err
 }
 
+func (list *DoublyLinkedList[T]) InsertAt(idx int) (T, error) {
+
+}
+func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
+
+}
+func (list *DoublyLinkedList[T]) RemoveAt(idx int) (T, error) {
+
+}
+
 // complexity: O(n)
 func (list *DoublyLinkedList[T]) ToString() string {
 	str := ""
