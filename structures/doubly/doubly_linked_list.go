@@ -1,6 +1,14 @@
 package doubly
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+
+var (
+	ErrListEmpty        = errors.New("list is empty")
+	ErrIndexOutOfBounds = errors.New("index out of bounds")
+)
 
 type Node[T any] struct {
 	value T
@@ -46,6 +54,36 @@ func (list *DoublyLinkedList[T]) Prepend(item T) {
 	newNode.next = list.head
 	list.head.prev = &newNode
 	list.head = &newNode
+}
+
+// complexity: O(n)
+func (list *DoublyLinkedList[T]) getNodeAt(idx int) (*Node[T], error) {
+	if list.length == 0 {
+		return nil, ErrListEmpty
+	}
+	if idx < 0 || idx >= list.length {
+		return nil, ErrIndexOutOfBounds
+	}
+
+	if idx == 0 {
+		return list.head, nil
+	}
+	if idx == list.length-1 {
+		return list.tail, nil
+	}
+
+	node := list.head
+	for i := 0; i < idx; i++ {
+		node = node.next
+	}
+
+	return node, nil
+}
+
+// complexity: O(n)
+func (list *DoublyLinkedList[T]) Get(idx int) (T, error) {
+	node, err := list.getNodeAt(idx)
+	return node.value, err
 }
 
 // complexity: O(n)

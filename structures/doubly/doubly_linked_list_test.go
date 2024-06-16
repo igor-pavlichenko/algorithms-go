@@ -44,3 +44,29 @@ func TestPrepend(t *testing.T) {
 	assert.Equal(4, list.length)
 	assert.Equal("[1] - [2] - [3] - [4]", list.ToString())
 }
+
+func TestGetNodeAt(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	item, err := list.getNodeAt(1)
+	assert.Equal(2, item.value)
+	assert.Nil(err)
+}
+
+func TestGet(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	item, err := list.Get(1)
+	assert.Equal(2, item)
+	assert.Nil(err)
+}
