@@ -120,6 +120,7 @@ func (list *DoublyLinkedList[T]) InsertAt(item T, idx int) error {
 	return nil
 }
 
+// complexity: O(n)
 func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
 	if list.length < 1 {
 		var zeroValue T
@@ -141,14 +142,31 @@ func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
 
 	left := curr.prev
 	right := curr.next
+
+	// update head if it was the head
+	if curr == list.head {
+		list.head = curr.next
+	}
+	// update tail if it was the tail
+	if curr == list.tail {
+		list.tail = curr.prev
+	}
+
+	// link the surrounding nodes
+	if left != nil {
 	left.next = right
+	}
+	if right != nil {
 	right.prev = left
+	}
+	// unlink removed node
 	curr.next = nil
 	curr.prev = nil
 	list.length--
 
 	return curr.value, nil
 }
+
 func (list *DoublyLinkedList[T]) RemoveAt(idx int) (T, error) {
 	var x T
 	return x, nil
