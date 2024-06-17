@@ -1,17 +1,21 @@
 # algorithms-go
-The Primagen's [algorithms course](https://frontendmasters.com/courses/algorithms/implementing-quicksort/) from FrontendMasters meant for TypeScript, but here is implemented in Go
 
+The Primagen's [algorithms & data structures course](https://frontendmasters.com/courses/algorithms/) from FrontendMasters meant for TypeScript, but here is implemented in Go
 
 ## search
-* LinearSearch
-* BinarySearch
-* TwoCrystalBalls problem
+
+- LinearSearch
+- BinarySearch
+- TwoCrystalBalls problem
 
 ## sort
-* BubbleSort
-* QuickSort
+
+- BubbleSort
+- QuickSort
 
 ## data structures
-* Queue
-* Stack
-* ArrayList
+
+- Queue
+- Stack
+- ArrayList
+- DoublyLinkedList

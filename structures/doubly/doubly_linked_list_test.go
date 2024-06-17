@@ -163,11 +163,97 @@ func TestRemove(t *testing.T) {
 	assert.Equal(3, list.tail.value)
 	assert.Equal("[3]", list.ToString())
 }
-	assert.Equal(2, list.length)
-	assert.Equal("[1] - [3]", list.ToString())
 
-	res2, err2 := list.Remove(2)
+func TestRemoveAtEmptyList(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+
+	res1, err1 := list.RemoveAt(0)
+	assert.Zero(res1)
+	assert.ErrorIs(err1, ErrListEmpty)
+}
+
+func TestRemoveAtOutOfBounds(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+	list.Append(1)
+
+	res1, err1 := list.RemoveAt(-1)
+	assert.Zero(res1)
+	assert.ErrorIs(err1, ErrIndexOutOfBounds)
+
+	res2, err2 := list.RemoveAt(1)
 	assert.Zero(res2)
-	assert.ErrorIs(err2, ErrItemNotFound)
+	assert.ErrorIs(err2, ErrIndexOutOfBounds)
+}
+
+func TestRemoveAtMiddle(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	assert.Equal(3, list.length)
+
+	res, err := list.RemoveAt(1)
+	assert.Equal(2, list.length)
+	assert.Equal(2, res)
+	assert.Nil(err)
 	assert.Equal("[1] - [3]", list.ToString())
+}
+
+func TestRemoveAtHead(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	assert.Equal(3, list.length)
+
+	res, err := list.RemoveAt(0)
+	assert.Nil(err)
+	assert.Equal(1, res)
+	assert.Equal(2, list.length)
+	assert.Equal(2, list.head.value)
+	assert.Equal("[2] - [3]", list.ToString())
+}
+
+func TestRemoveAtTail(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	assert.Equal(3, list.length)
+
+	res, err := list.RemoveAt(2)
+	assert.Nil(err)
+	assert.Equal(3, res)
+	assert.Equal(2, list.length)
+	assert.Equal(2, list.tail.value)
+	assert.Equal("[1] - [2]", list.ToString())
+}
+
+func TestRemoveAtEverything(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	assert.Equal(3, list.length)
+	assert.Equal("[1] - [2] - [3]", list.ToString())
+
+	list.RemoveAt(0)
+	list.RemoveAt(0)
+	list.RemoveAt(0)
+	assert.Equal(0, list.length)
+	assert.Nil(list.head)
+	assert.Nil(list.tail)
+	assert.Equal("", list.ToString())
 }

@@ -154,10 +154,10 @@ func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
 
 	// link the surrounding nodes
 	if left != nil {
-	left.next = right
+		left.next = right
 	}
 	if right != nil {
-	right.prev = left
+		right.prev = left
 	}
 	// unlink removed node
 	curr.next = nil
@@ -168,8 +168,43 @@ func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
 }
 
 func (list *DoublyLinkedList[T]) RemoveAt(idx int) (T, error) {
-	var x T
-	return x, nil
+	node, err := list.getNodeAt(idx)
+	if err != nil {
+		var zeroValue T
+		return zeroValue, err
+	}
+
+	list.length--
+	if list.length == 0 {
+		list.head = nil
+		list.tail = nil
+		return node.value, nil
+	}
+
+	left := node.prev
+	right := node.next
+
+	// update head if it was the head
+	if node == list.head {
+		list.head = node.next
+	}
+	// update tail if it was the tail
+	if node == list.tail {
+		list.tail = node.prev
+	}
+
+	// link the surrounding nodes
+	if left != nil {
+		left.next = right
+	}
+	if right != nil {
+		right.prev = left
+	}
+	// unlink removed node
+	node.next = nil
+	node.prev = nil
+
+	return node.value, nil
 }
 
 // complexity: O(n)
