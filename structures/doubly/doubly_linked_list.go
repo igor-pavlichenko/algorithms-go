@@ -86,14 +86,46 @@ func (list *DoublyLinkedList[T]) Get(idx int) (T, error) {
 	return node.value, err
 }
 
-func (list *DoublyLinkedList[T]) InsertAt(idx int) (T, error) {
+// complexity: O(n)
+func (list *DoublyLinkedList[T]) InsertAt(item T, idx int) error {
+	if idx == 0 {
+		list.Prepend(item)
+		return nil
+	}
+	if idx == list.length {
+		list.Append(item)
+		return nil
+	}
 
+	if idx < 0 || idx > list.length {
+		return ErrIndexOutOfBounds
+	}
+
+	node, err := list.getNodeAt(idx)
+	if err != nil {
+		return err
+	}
+	left := node.prev
+	right := node
+
+	newNode := Node[T]{value: item}
+	newNode.prev = left
+	newNode.next = right
+	left.next = &newNode
+	right.prev = &newNode
+
+	list.length++
+
+	return nil
 }
-func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
 
+func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
+	var x T
+	return x, nil
 }
 func (list *DoublyLinkedList[T]) RemoveAt(idx int) (T, error) {
-
+	var x T
+	return x, nil
 }
 
 // complexity: O(n)

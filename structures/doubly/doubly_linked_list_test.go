@@ -70,3 +70,27 @@ func TestGet(t *testing.T) {
 	assert.Equal(2, item)
 	assert.Nil(err)
 }
+
+func TestInsertAt(t *testing.T) {
+	assert := assert.New(t)
+
+	list := NewDoublyLinkedList[int]()
+
+	assert.Nil(list.InsertAt(9, 0))
+	assert.Equal(1, list.length)
+	assert.Equal("[9]", list.ToString())
+
+	list.Append(0)
+	list.Append(0)
+	list.InsertAt(9, 1)
+	assert.Equal("[9] - [9] - [0] - [0]", list.ToString())
+
+	list.InsertAt(9, list.length)
+	assert.Equal("[9] - [9] - [0] - [0] - [9]", list.ToString())
+
+	err1 := list.InsertAt(1, -1)
+	assert.ErrorIs(err1, ErrIndexOutOfBounds)
+
+	err2 := list.InsertAt(1, list.length+1)
+	assert.ErrorIs(err2, ErrIndexOutOfBounds)
+}
