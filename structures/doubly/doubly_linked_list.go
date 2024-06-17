@@ -8,21 +8,22 @@ import (
 var (
 	ErrListEmpty        = errors.New("list is empty")
 	ErrIndexOutOfBounds = errors.New("index out of bounds")
+	ErrItemNotFound     = errors.New("item not found")
 )
 
-type Node[T any] struct {
+type Node[T comparable] struct {
 	value T
 	next  *Node[T]
 	prev  *Node[T]
 }
 
-type DoublyLinkedList[T any] struct {
+type DoublyLinkedList[T comparable] struct {
 	head   *Node[T]
 	tail   *Node[T]
 	length int
 }
 
-func NewDoublyLinkedList[T any]() *DoublyLinkedList[T] {
+func NewDoublyLinkedList[T comparable]() *DoublyLinkedList[T] {
 	return &DoublyLinkedList[T]{}
 }
 
@@ -120,8 +121,33 @@ func (list *DoublyLinkedList[T]) InsertAt(item T, idx int) error {
 }
 
 func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
-	var x T
-	return x, nil
+	if list.length < 1 {
+		var zeroValue T
+		return zeroValue, ErrListEmpty
+	}
+
+	curr := list.head
+	for i := 0; i < list.length; i++ {
+		if curr.value == item {
+			break
+		}
+		curr = curr.next
+	}
+
+	if curr == nil {
+		var zeroValue T
+		return zeroValue, ErrItemNotFound
+	}
+
+	left := curr.prev
+	right := curr.next
+	left.next = right
+	right.prev = left
+	curr.next = nil
+	curr.prev = nil
+	list.length--
+
+	return curr.value, nil
 }
 func (list *DoublyLinkedList[T]) RemoveAt(idx int) (T, error) {
 	var x T
