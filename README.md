@@ -19,3 +19,7 @@ The Primagen's [algorithms & data structures course](https://frontendmasters.com
 - Stack
 - ArrayList
 - DoublyLinkedList
+
+## trees
+
+- traversal
