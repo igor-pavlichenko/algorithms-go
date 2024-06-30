@@ -6,10 +6,10 @@ package binarytree
  */
 func TraverseInOrder(head *Node[int]) *[]int {
 	var path []int
-	return walk(head, &path)
+	return walkIn(head, &path)
 }
 
-func walk(curr *Node[int], path *[]int) *[]int {
+func walkIn(curr *Node[int], path *[]int) *[]int {
 	// base case is when our node is non-existent
 	if curr == nil {
 		return path
@@ -23,11 +23,11 @@ func walk(curr *Node[int], path *[]int) *[]int {
 	// pre
 
 	// recurse
-	walk(curr.left, path)
+	walkIn(curr.left, path)
 	// (kinda pre)
 	*path = append(*path, curr.value)
 	// recurse again
-	walk(curr.right, path)
+	walkIn(curr.right, path)
 
 	// post
 	return path
