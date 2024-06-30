@@ -85,3 +85,22 @@ func TestTraversePreOrder(t *testing.T) {
 
 	assert.Equal(expected, TraversePreOrder(&tree))
 }
+
+func TestTraversePostOrder(t *testing.T) {
+	assert := assert.New(t)
+
+	expected := &[]int{
+		7,
+		5,
+		15,
+		10,
+		29,
+		45,
+		30,
+		100,
+		50,
+		20,
+	}
+
+	assert.Equal(expected, TraversePostOrder(&tree))
+}
