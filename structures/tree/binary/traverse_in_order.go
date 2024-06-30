@@ -21,9 +21,14 @@ func walk(curr *Node[int], path *[]int) *[]int {
 	// 3 - post
 
 	// pre
+
+	// recurse
 	walk(curr.left, path)
+	// (kinda pre)
 	*path = append(*path, curr.value)
+	// recurse again
 	walk(curr.right, path)
 
+	// post
 	return path
 }
