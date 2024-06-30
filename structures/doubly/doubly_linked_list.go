@@ -167,6 +167,7 @@ func (list *DoublyLinkedList[T]) Remove(item T) (T, error) {
 	return curr.value, nil
 }
 
+// complexity: O(n)
 func (list *DoublyLinkedList[T]) RemoveAt(idx int) (T, error) {
 	node, err := list.getNodeAt(idx)
 	if err != nil {
