@@ -61,3 +61,7 @@ func (q *Queue[T]) Peek() (T, error) {
 
 	return q.head.value, nil
 }
+
+func (q *Queue[T]) Len() int {
+	return q.length
+}
