@@ -22,6 +22,7 @@ The Primagen's [algorithms & data structures course](https://frontendmasters.com
 
 ## trees
 
-- DFS Traversal
+- Traversal (depth first)
 - BFS
+- DFS
 - Compare
