@@ -25,3 +25,24 @@ func DfsOnBST(node *Node[int], needle int) bool {
 	// else, means its greater than, so need to check left side
 	return DfsOnBST(node.left, needle)
 }
+
+func InsertOnBST(node *Node[int], value int) {
+	var newNode *Node[int] = &Node[int]{value: value}
+
+	if node.value < value {
+		// value is bigger so we need to walk to the right side
+		if node.right != nil {
+			InsertOnBST(node.right, value)
+		} else {
+			// but if right is null - we found a place to insert
+			node.right = newNode
+		}
+	} else if node.value >= value {
+		// value is equal or smaller so we need to walk to the left side
+		if node.left != nil {
+			InsertOnBST(node.left, value)
+		} else {
+			node.left = newNode
+		}
+	}
+}
