@@ -26,3 +26,6 @@ The Primagen's [algorithms & data structures course](https://frontendmasters.com
 - BFS
 - DFS
 - Compare
+- Binary Search Tree
+  - Insert
+  - Delete

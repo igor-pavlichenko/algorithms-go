@@ -26,6 +26,7 @@ func DfsOnBST(node *Node[int], needle int) bool {
 	return DfsOnBST(node.left, needle)
 }
 
+// complexity depends on height: O(h)
 func InsertOnBST(node *Node[int], value int) {
 	var newNode *Node[int] = &Node[int]{value: value}
 
@@ -45,4 +46,62 @@ func InsertOnBST(node *Node[int], value int) {
 			node.left = newNode
 		}
 	}
+}
+
+// complexity depends on height: O(h)
+func DeleteOnBST(tree *Node[int], target int) *Node[int] {
+	tree = delete(tree, target)
+	return tree
+}
+func delete(node *Node[int], target int) *Node[int] {
+	// base case 1 - empty tree
+	if node == nil {
+		return node
+	}
+
+	if target < node.value {
+		// base case 2 - target < value
+		// so we recurse to the left subtree
+		node.left = delete(node.left, target)
+		return node
+	} else if target > node.value {
+		// base case 3 - target > value
+		// so we recurse to the right subtree
+		node.right = delete(node.right, target)
+		return node
+	} else {
+		// base case 4 - target == value
+
+		// we found the node to be deleted
+		// and we know that this code will be run in recursive calls
+		// meaning that parent.left or parent.right will be assigned
+		// the return value of this block
+
+		if node.left == nil && node.right == nil {
+			// case 1 - no children
+			return nil // node deleted by simply assigning nil
+		} else if node.left == nil {
+			// case 2 - single child
+			return node.right
+		} else if node.right == nil {
+			return node.left
+		} else {
+			// case 3 - two children
+			// find a leaf node to replace the current node's value
+			replacement := getLargestOnSmallSide(node.left)
+			node.left = delete(node.left, replacement.value) // Update `node.left` with the result of the deletion
+			node.value = replacement.value
+			return node
+		}
+	}
+}
+
+func getLargestOnSmallSide(left *Node[int]) *Node[int] {
+	curr := left
+
+	for curr.right != nil {
+		curr = curr.right
+	}
+
+	return curr
 }

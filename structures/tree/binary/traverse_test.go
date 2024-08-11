@@ -6,6 +6,50 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func initializeTree() *Node[int] {
+	return &Node[int]{
+		value: 20,
+		right: &Node[int]{
+			value: 50,
+			right: &Node[int]{
+				value: 100,
+				right: nil,
+				left:  nil,
+			},
+			left: &Node[int]{
+				value: 30,
+				right: &Node[int]{
+					value: 45,
+					right: nil,
+					left:  nil,
+				},
+				left: &Node[int]{
+					value: 29,
+					right: nil,
+					left:  nil,
+				},
+			},
+		},
+		left: &Node[int]{
+			value: 10,
+			right: &Node[int]{
+				value: 15,
+				right: nil,
+				left:  nil,
+			},
+			left: &Node[int]{
+				value: 5,
+				right: &Node[int]{
+					value: 7,
+					right: nil,
+					left:  nil,
+				},
+				left: nil,
+			},
+		},
+	}
+}
+
 var tree Node[int] = Node[int]{
 	value: 20,
 	right: &Node[int]{
