@@ -43,10 +43,12 @@ var tree2 Node[int] = Node[int]{
 func TestCompare(t *testing.T) {
 	assert := assert.New(t)
 
-	assert.True(Compare(&tree, &tree))
+	tree := initializeTree()
+
+	assert.True(Compare(tree, tree))
 	assert.True(Compare(&tree2, &tree2))
 	assert.True(Compare(nil, nil))
-	assert.False(Compare(nil, &tree))
-	assert.False(Compare(&tree, nil))
-	assert.False(Compare(&tree, &tree2))
+	assert.False(Compare(nil, tree))
+	assert.False(Compare(tree, nil))
+	assert.False(Compare(tree, &tree2))
 }

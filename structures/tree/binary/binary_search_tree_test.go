@@ -9,7 +9,7 @@ import (
 func TestDfsOnBST(t *testing.T) {
 	assert := assert.New(t)
 
-	var tree = initializeTree()
+	tree := initializeTree()
 
 	assert.True(DfsOnBST(tree, 29))
 	assert.True(DfsOnBST(tree, 7))
@@ -25,7 +25,7 @@ func TestDfsOnBST(t *testing.T) {
 func TestInsertOnBST(t *testing.T) {
 	assert := assert.New(t)
 
-	var tree = initializeTree()
+	tree := initializeTree()
 
 	// root >= value
 	assert.Nil(tree.left.right.right)
@@ -41,7 +41,7 @@ func TestInsertOnBST(t *testing.T) {
 func TestDeleteOnBST_NodeWithNoChildren(t *testing.T) {
 	assert := assert.New(t)
 
-	var tree = initializeTree()
+	tree := initializeTree()
 
 	// removing a node with no children
 	assert.Equal(7, tree.left.left.right.value)
@@ -53,7 +53,7 @@ func TestDeleteOnBST_NodeWithNoChildren(t *testing.T) {
 func TestDeleteOnBST_NodeWithOneChild(t *testing.T) {
 	assert := assert.New(t)
 
-	var tree = initializeTree()
+	tree := initializeTree()
 
 	// removing a node with one child
 	assert.Equal(5, tree.left.left.value)
@@ -65,7 +65,7 @@ func TestDeleteOnBST_NodeWithOneChild(t *testing.T) {
 func TestDeleteOnBST_NodeWithTwoChildren(t *testing.T) {
 	assert := assert.New(t)
 
-	var tree = initializeTree()
+	tree := initializeTree()
 
 	// removing a node with two children
 	assert.Equal(50, tree.right.value)
@@ -78,7 +78,7 @@ func TestDeleteOnBST_NodeWithTwoChildren(t *testing.T) {
 func TestDeleteOnBST_RootNode(t *testing.T) {
 	assert := assert.New(t)
 
-	var tree = initializeTree()
+	tree := initializeTree()
 
 	// removing a root node with two children
 	assert.Equal(20, tree.value)

@@ -50,51 +50,10 @@ func initializeTree() *Node[int] {
 	}
 }
 
-var tree Node[int] = Node[int]{
-	value: 20,
-	right: &Node[int]{
-		value: 50,
-		right: &Node[int]{
-			value: 100,
-			right: nil,
-			left:  nil,
-		},
-		left: &Node[int]{
-			value: 30,
-			right: &Node[int]{
-				value: 45,
-				right: nil,
-				left:  nil,
-			},
-			left: &Node[int]{
-				value: 29,
-				right: nil,
-				left:  nil,
-			},
-		},
-	},
-	left: &Node[int]{
-		value: 10,
-		right: &Node[int]{
-			value: 15,
-			right: nil,
-			left:  nil,
-		},
-		left: &Node[int]{
-			value: 5,
-			right: &Node[int]{
-				value: 7,
-				right: nil,
-				left:  nil,
-			},
-			left: nil,
-		},
-	},
-}
-
 func TestTraverseInOrder(t *testing.T) {
 	assert := assert.New(t)
 
+	tree := initializeTree()
 	expected := &[]int{
 		5,
 		7,
@@ -108,12 +67,13 @@ func TestTraverseInOrder(t *testing.T) {
 		100,
 	}
 
-	assert.Equal(expected, TraverseInOrder(&tree))
+	assert.Equal(expected, TraverseInOrder(tree))
 }
 
 func TestTraversePreOrder(t *testing.T) {
 	assert := assert.New(t)
 
+	tree := initializeTree()
 	expected := &[]int{
 		20,
 		10,
@@ -127,12 +87,13 @@ func TestTraversePreOrder(t *testing.T) {
 		100,
 	}
 
-	assert.Equal(expected, TraversePreOrder(&tree))
+	assert.Equal(expected, TraversePreOrder(tree))
 }
 
 func TestTraversePostOrder(t *testing.T) {
 	assert := assert.New(t)
 
+	tree := initializeTree()
 	expected := &[]int{
 		7,
 		5,
@@ -146,5 +107,5 @@ func TestTraversePostOrder(t *testing.T) {
 		20,
 	}
 
-	assert.Equal(expected, TraversePostOrder(&tree))
+	assert.Equal(expected, TraversePostOrder(tree))
 }

@@ -9,7 +9,9 @@ import (
 func TestBFS(t *testing.T) {
 	assert := assert.New(t)
 
-	assert.True(BFS(&tree, 29))
-	assert.True(BFS(&tree, 7))
-	assert.False(BFS(&tree, 8))
+	tree := initializeTree()
+
+	assert.True(BFS(tree, 29))
+	assert.True(BFS(tree, 7))
+	assert.False(BFS(tree, 8))
 }
