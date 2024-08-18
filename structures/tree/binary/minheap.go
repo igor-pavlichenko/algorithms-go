@@ -27,7 +27,21 @@ func rightChildIdx(idx int) int {
 }
 
 func (heap *MinHeap) heapifyUp(idx int) {
+	if idx == 0 {
+		return // because we reached the top
+	}
 
+	curr := (*heap.data)[idx]
+	parentIdx := parentIdx(idx)
+	parent := (*heap.data)[parentIdx]
+
+	if parent > curr {
+		// swap current <-> parent
+		(*heap.data)[idx] = parent
+		(*heap.data)[parentIdx] = curr
+		// keep heapifying up
+		heap.heapifyUp(parentIdx)
+	}
 }
 
 func (heap *MinHeap) heapifyDown(idx int) {
