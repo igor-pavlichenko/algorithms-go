@@ -11,7 +11,7 @@ is a binary tree where every child and grand child is smaller (**MaxHeap**), or 
   - insert it at last spot
   - check if heap conditions are met
   - if not, bubble it up and check again
-- **deletion**
+- **deletion** = pop = removing root node
   - after deleting a node, we have an empty spot in our tree
   - so we find the last node, delete it, insert it in the empty spot
   - heapify down

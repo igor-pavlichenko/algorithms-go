@@ -45,6 +45,32 @@ func (heap *MinHeap) heapifyUp(idx int) {
 }
 
 func (heap *MinHeap) heapifyDown(idx int) {
+	leftIdx := leftChildIdx(idx)
+	rightIdx := rightChildIdx(idx)
+
+	// base cases
+	// we reached the end, or
+	// the first child-index we must check is outside of the array
+	if idx >= heap.length || leftIdx >= heap.length {
+		return
+	}
+
+	currValue := (*heap.data)[idx]
+	leftValue := (*heap.data)[leftIdx]
+	rightValue := (*heap.data)[rightIdx]
+
+	// find the smallest of 2 children, and if our value is smaller - swap them
+	if leftValue < rightValue && leftValue < currValue {
+		(*heap.data)[idx] = leftValue
+		(*heap.data)[leftIdx] = currValue
+		// keep heapifying down
+		heap.heapifyDown(leftIdx)
+	} else if rightValue < leftValue && rightValue < currValue {
+		(*heap.data)[idx] = rightValue
+		(*heap.data)[rightIdx] = currValue
+		// keep heapifying down
+		heap.heapifyDown(rightIdx)
+	}
 
 }
 
