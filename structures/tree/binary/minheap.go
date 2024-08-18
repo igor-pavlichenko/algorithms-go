@@ -80,7 +80,9 @@ func (heap *MinHeap) heapifyDown(idx int) {
 // - if not, bubble it up and check again
 // complexity: O(log n)
 func (heap *MinHeap) Insert(value int) {
-
+	(*heap.data) = append((*heap.data), value)
+	heap.heapifyUp(heap.length)
+	heap.length++
 }
 
 // - **deletion**

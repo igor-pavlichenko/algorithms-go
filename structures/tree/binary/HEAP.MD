@@ -8,7 +8,7 @@ is a binary tree where every child and grand child is smaller (**MaxHeap**), or 
 - it can be used for priority
 - there is no traversing the tree
 - **insertion**
-  - insert it at last spot
+  - insert it at the end
   - check if heap conditions are met
   - if not, bubble it up and check again
 - **deletion** = pop = removing root node
