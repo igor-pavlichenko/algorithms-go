@@ -93,5 +93,24 @@ func (heap *MinHeap) Insert(value int) {
 // - if it's larger than the smallest child - swap & repeat
 // complexity: O(log n)
 func (heap *MinHeap) Pop() int {
-	return -1
+	if heap.length == 0 {
+		return -1 // lazy error
+	}
+
+	output := (*heap.data)[0]
+
+	if heap.length == 1 {
+		(*heap.data) = []int{}
+		heap.length--
+		return output
+	}
+
+	// move the last node to the root
+	(*heap.data)[0] = (*heap.data)[heap.length-1]
+	heap.length--
+	// move it down until it finds it's place
+	heap.heapifyDown(0)
+	// actually remove it from underlying array
+	(*heap.data) = (*heap.data)[:heap.length]
+	return output
 }

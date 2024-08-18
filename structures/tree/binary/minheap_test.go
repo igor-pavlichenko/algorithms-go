@@ -59,4 +59,5 @@ func TestPop(t *testing.T) {
 	assert.Equal(69, heap.Pop())
 	assert.Equal(420, heap.Pop())
 	assert.Equal(0, heap.length)
+	assert.Equal(-1, heap.Pop())
 }
